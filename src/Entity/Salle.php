@@ -19,6 +19,9 @@ class Salle
     #[ORM\Column]
     private ?int $capSalle = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Salles')]
+    private ?Seance $seance = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +54,18 @@ class Salle
     public function setCapSalle(int $capSalle): static
     {
         $this->capSalle = $capSalle;
+
+        return $this;
+    }
+
+    public function getSeance(): ?Seance
+    {
+        return $this->seance;
+    }
+
+    public function setSeance(?Seance $seance): static
+    {
+        $this->seance = $seance;
 
         return $this;
     }

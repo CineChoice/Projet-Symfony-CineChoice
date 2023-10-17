@@ -21,12 +21,12 @@ class Categorie
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $descCat = null;
 
-    #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'Categories')]
-    private Collection $films;
+    #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'Films')]
+    private Collection $Categories;
 
     public function __construct()
     {
-        $this->films = new ArrayCollection();
+        $this->Categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,25 +68,25 @@ class Categorie
     /**
      * @return Collection<int, Film>
      */
-    public function getFilms(): Collection
+    public function getCategories(): Collection
     {
-        return $this->films;
+        return $this->Categories;
     }
 
-    public function addFilm(Film $film): static
+    public function addCategory(Film $category): static
     {
-        if (!$this->films->contains($film)) {
-            $this->films->add($film);
-            $film->addCategory($this);
+        if (!$this->Categories->contains($category)) {
+            $this->Categories->add($category);
+            $category->addFilm($this);
         }
 
         return $this;
     }
 
-    public function removeFilm(Film $film): static
+    public function removeCategory(Film $category): static
     {
-        if ($this->films->removeElement($film)) {
-            $film->removeCategory($this);
+        if ($this->Categories->removeElement($category)) {
+            $category->removeFilm($this);
         }
 
         return $this;

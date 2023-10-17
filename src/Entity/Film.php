@@ -3,9 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\FilmRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
@@ -25,16 +22,8 @@ class Film
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $afficheFilm = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateSortieFilm = null;
-
-    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'films')]
-    private Collection $Categories;
-
-    public function __construct()
-    {
-        $this->Categories = new ArrayCollection();
-    }
+    #[ORM\Column]
+    private ?int $dateSortieFilm = null;
 
     public function getId(): ?int
     {
@@ -84,38 +73,14 @@ class Film
         return $this;
     }
 
-    public function getDateSortieFilm(): ?\DateTimeInterface
+    public function getDateSortieFilm(): ?int
     {
         return $this->dateSortieFilm;
     }
 
-    public function setDateSortieFilm(\DateTimeInterface $dateSortieFilm): static
+    public function setDateSortieFilm(int $dateSortieFilm): static
     {
         $this->dateSortieFilm = $dateSortieFilm;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Categorie>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->Categories;
-    }
-
-    public function addCategory(Categorie $category): static
-    {
-        if (!$this->Categories->contains($category)) {
-            $this->Categories->add($category);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categorie $category): static
-    {
-        $this->Categories->removeElement($category);
 
         return $this;
     }

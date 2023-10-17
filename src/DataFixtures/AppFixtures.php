@@ -14,6 +14,8 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        //Ajout de toute les fixture
+
         $lesFilms = $this->chargeFichier("film.csv");
 
         foreach ($lesFilms as $value) {
@@ -71,4 +73,4 @@ class AppFixtures extends Fixture
         fclose($fichierCsv);
         return $data;
     }
-}
+} 

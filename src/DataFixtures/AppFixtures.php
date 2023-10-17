@@ -16,6 +16,8 @@ class AppFixtures extends Fixture
     {
         //Ajout de toute les fixture
 
+        $faker=Factory::create("fr_FR");
+
         $lesFilms = $this->chargeFichier("film.csv");
 
         foreach ($lesFilms as $value) {
@@ -23,13 +25,13 @@ class AppFixtures extends Fixture
             $film       ->setId(intval($value[0]))
                         ->setTitreFilm($value[1])
                         ->setDescFilm($value[2])
-                        ->setDateSortieFilm($value[3])
+                        ->setDateSortieFilm(intval($value[3]))
                         ->setAfficheFilm($value[4]);
             $manager->persist($film);
             $this->addReference("film".$film->getId(),$film);
         }
 
-        $lesCategories = $this->chargeFichier("film.csv");
+        $lesCategories = $this->chargeFichier("categorie.csv");
 
         foreach ($lesCategories as $value) {
             $Categorie = new Categorie();
@@ -37,10 +39,10 @@ class AppFixtures extends Fixture
                         ->setNomCat($value[1])
                         ->setDescCat($value[2]);
             $manager->persist($Categorie);
-            $this->addReference("film".$Categorie->getId(),$Categorie);
+            $this->addReference("categorie".$Categorie->getId(),$Categorie);
         }
 
-        $lesSalles = $this->chargeFichier("film.csv");
+        $lesSalles = $this->chargeFichier("salle.csv");
 
         foreach ($lesSalles as $value) {
             $Salle = new Salle();
@@ -48,18 +50,18 @@ class AppFixtures extends Fixture
                         ->setNomSalle($value[1])
                         ->setCapSalle($value[2]);
             $manager->persist($Salle);
-            $this->addReference("film".$Salle->getId(),$Salle);
+            $this->addReference("salle".$Salle->getId(),$Salle);
         }
 
-        $lesSeances = $this->chargeFichier("film.csv");
+        $lesSeances = $this->chargeFichier("seance.csv");
 
         foreach ($lesSeances as $value) {
             $Seance = new Seance();
             $Seance  ->setId(intval($value[0]))
-                        ->setDateSeance($value[1])
-                        ->setHeureDebSeance($value[2]);
+                        ->setDateSeance($faker->dateTime())
+                        ->setHeureDebSeance($faker->dateTimeThisDecade());
             $manager->persist($Seance);
-            $this->addReference("film".$Seance->getId(),$Seance);
+            $this->addReference("seance".$Seance->getId(),$Seance);
         }
 
         $manager->flush();

@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FilmController!{% endblock %}
+{% block title %}Liste des Films{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1 class="pt-2 text-center">Liste des Artistes</h1>
+<hr>
+<div class="row pt-2">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/Projet-CineChoice/src/Controller/FilmController.php'|file_link(0) }}">src/Controller/FilmController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/Projet-CineChoice/templates/film/index.html.twig'|file_link(0) }}">templates/film/index.html.twig</a></code></li>
-    </ul>
+    {% for leFilm in lesFilms %}
+
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="card mb-3">
+                <h3 class="card-header"><a href="">{{leFilm.titreFilm}}</a></h3> {# {{path('ficheFilm', {'id': leFilm.id })}} #}
+                <div class="card-body">
+                </div>
+                <img class="avatar mx-auto d-block" style="height: auto; width: auto; display: block;" src="{{leFilm.afficheFilm}}" alt="Affiche du film">
+                <div class="card-body">
+                    <p class="card-text">{{leFilm.descFilm|slice(0,200)|raw}}...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Le film est sotie en {{leFilm.dateSortieFilm}}</li>
+                    <li class="list-group-item">{% for laSeance in leFilm.sceance %} <span class="badge">{{laSceance.id}}</span> {% endfor %}</li>
+                </ul>
+            </div>
+        </div>
+
+    {% endfor %}
+
 </div>
+
 {% endblock %}

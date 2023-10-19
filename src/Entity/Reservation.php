@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
@@ -16,59 +14,43 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $nbBilletsR = null;
+    private ?int $NbBillet = null;
 
-    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Seance::class)]
-    private Collection $Reservations;
-
-    public function __construct()
-    {
-        $this->Reservations = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?Session $seance = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNbBilletsR(): ?int
+    public function setId(int $id): self
     {
-        return $this->nbBilletsR;
-    }
-
-    public function setNbBilletsR(int $nbBilletsR): static
-    {
-        $this->nbBilletsR = $nbBilletsR;
+        $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Seance>
-     */
-    public function getReservations(): Collection
+    public function getNbBillet(): ?int
     {
-        return $this->Reservations;
+        return $this->NbBillet;
     }
 
-    public function addReservation(Seance $reservation): static
+    public function setNbBillet(int $NbBillet): static
     {
-        if (!$this->Reservations->contains($reservation)) {
-            $this->Reservations->add($reservation);
-            $reservation->setReservation($this);
-        }
+        $this->NbBillet = $NbBillet;
 
         return $this;
     }
 
-    public function removeReservation(Seance $reservation): static
+    public function getSeance(): ?Session
     {
-        if ($this->Reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getReservation() === $this) {
-                $reservation->setReservation(null);
-            }
-        }
+        return $this->seance;
+    }
+
+    public function setSeance(?Session $seance): static
+    {
+        $this->seance = $seance;
 
         return $this;
     }

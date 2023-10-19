@@ -12,8 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FilmController extends AbstractController
 {
     #[Route('/films', name: 'films', methods:['GET'])]
-    public function listeFilms(Film $films): Response
+    public function listeFilms(FilmRepository $repo): Response
     {
+        $films=$repo->findAll();
+
         return $this->render('film/listeFilms.html.twig', [
             'lesFilms' => $films,
         ]);

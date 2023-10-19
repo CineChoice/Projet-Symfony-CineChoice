@@ -13,7 +13,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-            <a class="navbar-brand" href="#">CineChoice</a>
+            <a class="navbar-brand" href="{{path('accueil')}}">CineChoice</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,17 +29,12 @@
                         <a class="nav-link" href="{{path('seances')}}">Liste des Séances</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">?</a>
+                        <a class="nav-link" href="{{path('salles')}}">Liste des salles</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
+                        <a class="dropdown-item" href="{{path('admin_salles')}}">Gestion des salles</a>
                     </li>
                 </ul>
             </div>

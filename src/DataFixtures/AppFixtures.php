@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use Faker\Factory;
-use App\Entity\Film;
-use App\Entity\Salle;
-use App\Entity\Seance;
-use App\Entity\Categorie;
+use App\Entity\Movie;
+use App\Entity\Room;
+use App\Entity\Session;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -21,23 +21,23 @@ class AppFixtures extends Fixture
         $lesFilms = $this->chargeFichier("film.csv");
 
         foreach ($lesFilms as $value) {
-            $film = new Film();
+            $film = new Movie();
             $film       ->setId(intval($value[0]))
-                        ->setTitreFilm($value[1])
-                        ->setDescFilm($value[2])
-                        ->setDateSortieFilm(intval($value[3]))
-                        ->setAfficheFilm($value[4]);
-            $manager->persist($film);
+                        ->setNom($value[1])
+                        ->setDescription($value[2])
+                        ->setAffiche($value[3])
+                        ->setDate(intval($value[4]));
+                        $manager->persist($film);
             $this->addReference("film".$film->getId(),$film);
         }
 
         $lesCategories = $this->chargeFichier("categorie.csv");
 
         foreach ($lesCategories as $value) {
-            $Categorie = new Categorie();
+            $Categorie = new Category();
             $Categorie  ->setId(intval($value[0]))
-                        ->setNomCat($value[1])
-                        ->setDescCat($value[2]);
+                        ->setNom($value[1])
+                        ->setDescription($value[2]);
             $manager->persist($Categorie);
             $this->addReference("categorie".$Categorie->getId(),$Categorie);
         }
@@ -45,10 +45,10 @@ class AppFixtures extends Fixture
         $lesSalles = $this->chargeFichier("salle.csv");
 
         foreach ($lesSalles as $value) {
-            $Salle = new Salle();
+            $Salle = new Room();
             $Salle  ->setId(intval($value[0]))
-                        ->setNomSalle($value[1])
-                        ->setCapSalle($value[2]);
+                        ->setNom($value[1])
+                        ->setCapaciter($value[2]);
             $manager->persist($Salle);
             $this->addReference("salle".$Salle->getId(),$Salle);
         }
@@ -56,10 +56,10 @@ class AppFixtures extends Fixture
         $lesSeances = $this->chargeFichier("seance.csv");
 
         foreach ($lesSeances as $value) {
-            $Seance = new Seance();
+            $Seance = new Session();
             $Seance  ->setId(intval($value[0]))
-                        ->setDateSeance($faker->dateTime())
-                        ->setHeureDebSeance($faker->dateTimeThisDecade());
+                        ->setDate($value[1])
+                        ->setHeure($value[2]);
             $manager->persist($Seance);
             $this->addReference("seance".$Seance->getId(),$Seance);
         }

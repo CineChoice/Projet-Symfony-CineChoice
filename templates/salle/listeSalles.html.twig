@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Salles{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">Liste des Salles</h1>
+<hr>
+<div class="row pt-2">
+
+    {% for laSalle in lesSalles %}
+
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+        <div class="card mb-3">
+            <h4 class="card-header" align="center"><a href="">{{laSalle.nom}}</a></h4> 
+
+            <div class="card-body text-center">
+                <p class="card-text">La capacité de la salle est de {{laSalle.capaciter}}</p>
+            </div>
+
+        </div>
+    </div>
+
+    {% endfor %} 
+
+</div>
+
+{% endblock %}

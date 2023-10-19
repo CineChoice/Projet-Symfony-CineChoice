@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Films | Admin{% endblock %}
+
+{% block body %}
+    <h1 class="pt-2 text-center">Gestion des Films | Admin</h1>
+
+        <a href="{# {{path("admin_album_ajout")}} #}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter un film</a>
+
+        <hr>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col-1"></th>
+                    <th scope="col-2">Titre</th>
+                    <th scope="col-1">Description</th>
+                    <th scope="col-2">Date de Sortie</th>
+                    <th scope="col-2">Catégorie(s)</th>
+                    <th scope="col-2">Séance(s)</th>
+                    <th scope="col-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for leFilm in lesFilms %}
+
+                        <tr class="table-secondary">
+                            <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px; display: block;" src="{{leFilm.affiche}}{# {{asset("images/albums/" ~ leFilm.image)}} #}" alt="Film Image"></td>
+                            <td class="col-2">{{leFilm.nom}}</td>
+                            <td class="col-3">{% if leFilm.description|length < 50 %} {{leFilm.description}} {% else %} {{leFilm.description|slice(0,50)|raw}}... {% endif %}</td>
+                            <td class="col-1">{{leFilm.date}}</td>
+                            <td class="col-2">{% for laCategorie in leFilm.categories %} <span class="badge">{{laCategorie.nom}}</span> {% endfor %}</td>
+                            <td class="col-1">{% for laSeance in leFilm.sessions %} <span class="badge">{{laSeance.id}}</span> {% endfor %}</td>
+                            <td class="col-2">
+                                <a href="{# {{path('admin_album_modif', {'id': leFilm.id})}} #}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'un album" data-message="Êtes vous sûr de vouloir supprimer l'album : {{leFilm.nom}}" data-libelleBouton="Supprimer" data-lien="{# {{path('admin_album_supr', {'id': leFilm.id})}} #}"><i class="fa-solid fa-user-slash"></i></a>
+                            </td>
+                        </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

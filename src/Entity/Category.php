@@ -21,8 +21,11 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'Categories')]
+    #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'categories')]
     private Collection $movies;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $couleur = null;
 
     public function __construct()
     {
@@ -88,6 +91,18 @@ class Category
         if ($this->movies->removeElement($movie)) {
             $movie->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(?string $couleur): static
+    {
+        $this->couleur = $couleur;
 
         return $this;
     }

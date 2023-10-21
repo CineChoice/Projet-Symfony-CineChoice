@@ -13,10 +13,10 @@ class FilmController extends AbstractController
     #[Route('/films', name: 'films', methods:['GET'])]
     public function listeFilms(MovieRepository $repo): Response
     {
-        $films=$repo->findAll();
+        $films=$repo->listeFilmsComplete();
 
-        return $this->render('film/listeFilms.html.twig', [
-            'lesFilms' => $films,
+        return $this->render('admin/film/listeFilms.html.twig', [
+            'lesFilms' => $films
         ]);
     }
 }

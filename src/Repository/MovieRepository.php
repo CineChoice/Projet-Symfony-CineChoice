@@ -22,10 +22,7 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
-//    /**
-//     * @return Movie[] Returns an array of Movie objects
-//     */
-   public function listeFilmsComplete()
+   public function listeFilmsComplete() : ?Query
    {
        return $this->createQueryBuilder('f')
            ->select('f', 'c', 's')
@@ -33,7 +30,6 @@ class MovieRepository extends ServiceEntityRepository
            ->leftJoin('f.sessions', 's')
            ->orderBy('f.nom', 'ASC')
            ->getQuery()
-           ->getResult()
        ;
    }
 

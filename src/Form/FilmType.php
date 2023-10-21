@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Movie;
+use App\Entity\Session;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -54,6 +55,18 @@ class FilmType extends AbstractType
                     'class'=>"selectStyles",
                 ]
             ])
+            ->add('sessions', EntityType::class, [
+                'class'=>Session::class,
+                'choice_label'=>'id',
+                'label' => "Séance(s) associées",
+                'required'=>false,
+                'multiple' => true,
+                'by_reference'=>false,
+                'attr'=>[
+                    'class'=>"selectStyles",
+                ]
+            ])
+        ;
         ;
     }
 

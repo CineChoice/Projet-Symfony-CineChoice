@@ -6,6 +6,7 @@ use App\Entity\Movie;
 use App\Form\FilmType;
 use App\Repository\MovieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FilmController extends AbstractController
 {
         #[Route('/admin/films', name: 'admin_films', methods:['GET'])]
-        public function listeFilms(MovieRepository $repo): Response
+        public function listeFilms(MovieRepository $repo, PaginatorInterface $paginator, Request $request): Response
         {
-            $films=$repo->listeFilmsCompleteAdmin();
+            $films = $paginator->paginate(
+                $repo->listeFilmsCompleteAdmin(),
+                $request->query->getInt('page', 1), 
+                9
+            );
     
             return $this->render('admin/film/listeFilms.html.twig', [
                 'lesFilms' => $films

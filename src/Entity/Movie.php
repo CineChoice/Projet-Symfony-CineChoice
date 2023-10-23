@@ -45,10 +45,15 @@ class Movie
     #[ORM\OneToMany(mappedBy: 'film', targetEntity: Session::class)]
     private Collection $sessions;
 
+    #[ORM\Column(type: "datetime_immutable", nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->sessions = new ArrayCollection();
+        $this->setUpdatedAt(new \DateTimeImmutable);
+        $this->setAffiche("default.jpg");
     }
 
     public function getId(): ?int
@@ -161,6 +166,18 @@ class Movie
                 $session->setFilm(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

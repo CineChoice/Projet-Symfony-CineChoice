@@ -44,6 +44,25 @@ class FilmController extends AbstractController
             $form->handleRequest($request);
         
             if ($form->isSubmitted() && $form->isValid()) {
+                //on récupère l'image sélectionnée
+                $fichierAffiche = $form->get('afficheFile')->getData();
+                
+                if ($fichierAffiche != null)
+                {
+                    //on supprime l'ancien fichier
+                    if ($film->getAffiche() != "default.jpg")
+                    {
+                        \unlink($this->getParameter('affichesFilmsDestination') . $film->getAffiche());
+                    }
+                    
+                    //on crée le nom du nouveau fichier
+                    $fichier = md5(\uniqid()) . "." . $fichierAffiche->guessExtension();
+
+                    //on déplace le fichier chargé dans le dossier public
+                    $fichierAffiche->move($this->getParameter('affichesFilmsDestination'), $fichier);
+                    $film->setAffiche($fichier);
+                }
+
                 $manager->persist($film);
                 $manager->flush();
         

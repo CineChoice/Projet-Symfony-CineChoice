@@ -26,7 +26,7 @@
                 {% for leFilm in lesFilms %}
 
                         <tr class="table-secondary">
-                            <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px; display: block;" src="{{leFilm.affiche}}{# {{asset("images/films/" ~ leFilm.image)}} #}" alt="Film Image"></td>
+                            <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px; display: block;" src="{{asset("images/affiches/" ~ leFilm.affiche)}}" alt="Film Image"></td>
                             <td class="col-2">{{leFilm.nom}}</td>
                             <td class="col-3">{% if leFilm.description|length < 50 %} {{leFilm.description}} {% else %} {{leFilm.description|slice(0,50)|raw}}... {% endif %}</td>
                             <td class="col-1">{{leFilm.date}}</td>

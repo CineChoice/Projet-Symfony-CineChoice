@@ -27,10 +27,11 @@
         {{form_row(formFilm.sessions)}}
     </div>
     <div class="col-4">
-        <img src=" {# {{asset("images/films/" ~ formFilm.image.vars.value)}} #} " id="imageAffichee" alt="Image de l'film" class="rounded mx-auto d-block img-thumbnail mb-2" style="height: 300px; width: 300px; display: block;"> {{form_row(formFilm.affiche)}}
-        {# {{form_row(formFilm.imageFile)}}
-        {{form_errors(formFilm.imageFile)}}
-        <a class="btn btn-primary d-block center" id="chargePochette"><i class="fas fa-upload"> Charger la pochette</i></a> #}
+        <img src=" {{asset("images/affiches/" ~ formFilm.affiche.vars.value)}} " id="afficheAffichee" alt="Affiche du film" class="rounded mx-auto d-block img-thumbnail mb-2" style="height: 450px; width: 318px; display: block;">
+        {{form_row(formFilm.affiche)}}
+        {{form_row(formFilm.afficheFile)}}
+        {{form_errors(formFilm.afficheFile)}}
+        <a class="btn btn-primary d-block center" id="chargeAffiche"><i class="fas fa-upload"> Charger l'affiche du film</i></a>
     </div>
 </div>
 
@@ -48,8 +49,8 @@
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>$(document).ready(function() {$('.selectStyles').select2();});</script>
-    {# <script src=" {{asset("js/gestionUpload.js")}} " defer ></script>
-    <script>
+    <script src=" {{asset("js/gestionUpload.js")}} " defer ></script>
+    {# <script>
         window.onload = () => {
             //Je récupère le bouton "Ajouter un morceau"
             const btn_add_morceau = document.querySelector('.add-morceau')

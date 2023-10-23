@@ -9,7 +9,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -32,9 +34,16 @@ class FilmType extends AbstractType
                     "placeholder" => "Saisir la description du film"
                 ]
             ])
-            ->add('affiche', TextType::class, [
+            ->add('affiche', HiddenType::class)
+            ->add('afficheFile', FileType::class, [
+                'mapped'=>false,
+                'required'=>false,
+                'label'=>"Charger l'affiche du film",
                 'attr'=>[
-                    "placeholder"=>"Saisir le chemin de l'affiche du film"
+                    'accept'=>".jpg,.png"
+                ],
+                'row_attr'=>[
+                    'class'=>"d-none"
                 ]
             ])
             ->add('date', IntegerType::class, [

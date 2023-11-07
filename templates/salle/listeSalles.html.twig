@@ -15,13 +15,17 @@
             <h4 class="card-header" align="center"><a href="">{{laSalle.nom}}</a></h4> 
 
             <div class="card-body text-center">
-                <p class="card-text">La capacité de la salle est de {{laSalle.capaciter}}</p>
+                <p class="card-text">La capacité de la salle est de {{laSalle.capaciter}} places</p>
             </div>
 
         </div>
     </div>
 
     {% endfor %} 
+
+    <div class="navigation mx-auto">
+        {{ knp_pagination_render(lesSalles) }}
+    </div>
 
 </div>
 

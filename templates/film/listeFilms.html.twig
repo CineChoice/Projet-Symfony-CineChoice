@@ -15,7 +15,7 @@
                 <h4 class="card-header" align="center"><a href="">{{leFilm.nom}}</a></h4> {# {{path('ficheFilm', {'id': leFilm.id })}} #}
                 <div class="card-body">
                 </div>
-                <img class="avatar mx-auto d-block" style="height: auto; width: auto; display: block;" src="{{leFilm.affiche}}" alt="Affiche du film">
+                <img class="avatar mx-auto d-block" style="height: 450px; width: 318px; display: block;" src="{{asset("images/affiches/" ~ leFilm.affiche)}}" alt="Affiche du film">
                 <div class="card-body">
                     <p class="card-text">{{leFilm.description|slice(0,200)|raw}}...</p>
                 </div>
@@ -27,6 +27,10 @@
         </div>
 
     {% endfor %} 
+
+    <div class="navigation mx-auto">
+        {{ knp_pagination_render(lesFilms) }}
+    </div>
 
 </div>
 

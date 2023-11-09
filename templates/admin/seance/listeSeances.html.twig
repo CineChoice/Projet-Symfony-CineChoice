@@ -22,23 +22,26 @@
             </thead>
             <tbody>
 
-                {% for laSalle in lesSalles %}
+                {% for laSeance in lesSeances %}
 
                         <tr class="table-secondary">
-                            <td class="col-2">{{laSalle.id}}</td>
-                            <td class="col-2">{{laSalle.nom}}</td>
-                            <td class="col-2">{{laSalle.capaciter}}</td>
+                            <td class="col-2">{{laSeance.id}}</td>
+                            <td class="col-2">{{laSeance.date}}</td>
+                            <td class="col-2">{{laSeance.heure}}</td>
+                            <td class="col-2">{{laSeance.film.nom}}</td>
+                            <td class="col-2">{{laSeance.salle.nom}}</td>
                             <td class="col-2">test</td>
 
                 {% endfor %}
 
-                <div class="navigation mx-auto">
-                    {{ knp_pagination_render(lesSalles) }}
-                </div>
+ 
 
             </tbody>
         </table>
     </div>
+        <div class="navigation mx-auto">
+            {{ knp_pagination_render(lesSeances) }}
+        </div>
 {% endblock %}
 
 

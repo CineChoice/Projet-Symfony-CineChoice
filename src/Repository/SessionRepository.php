@@ -31,6 +31,15 @@ class SessionRepository extends ServiceEntityRepository
             ->getQuery(); 
     }
 
+    
+    public function listeSeancesCompleteAdmin () : ?Query
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s')#, 'sa')// selection des tables | s seance |sa salle
+            #->leftJoin('s.salle', 'sa')
+            ->orderBy('s.id')
+            ->getQuery(); 
+    }
 
 
 //    /**

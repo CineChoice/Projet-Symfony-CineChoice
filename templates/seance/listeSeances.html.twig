@@ -7,6 +7,31 @@
     <h1 class="pt-2 text-center">Liste des Séances</h1>
     <hr>
     <div class="row pt-2">
+{#
+    {% for laSeance in lesSeances %}
+
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="card mb-3">
+                <h4 class="card-header" align="center"><a href="">{{laSeance.id}}</a></h4> 
+
+                <div class="card-body text-center">
+                    <p class="card-text">Information de la séance : </p>
+                    <p class="card-text">date : {{laSeance.date}}</p>
+                    <p class="card-text">heure : {{laSeance.heure}}</p>
+                    <p class="card-text">film : {{laSeance.film.nom}}</p>
+                    <p class="card-text">salle : {{laSeance.salle.id}}</p>
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %} 
+
+
+    <div class="navigation mx-auto">
+        {{ knp_pagination_render(lesSeances) }}
+    </div>
+    #}
 
         {% for laSeance in lesSeances %}
 
@@ -15,8 +40,8 @@
                     <h4 class="card-header" align="center">N°{{laSeance.id}}</h4>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Le filme de la séance sera {{laSeance.film}}.</li>
-                            <li class="list-group-item">Dans la salle {{laSeance.salle}}.</li>
+                            <li class="list-group-item">Le filme de la séance sera {{laSeance.film.nom}}.</li>
+                            <li class="list-group-item">Dans la salle {{laSeance.salle.nom}}.</li>
                             <li class="list-group-item">Cette scéance est prévu pour le {{laSeance.date}}.</li>
                             <li class="list-group-item">Elle aura lieux à {{laSeance.heure}}.</li>
                         </ul>
@@ -25,6 +50,10 @@
             </div>
 
         {% endfor %} 
+
+    <div class="navigation mx-auto">
+        {{ knp_pagination_render(lesSeances) }}
+    </div>
 
     </div>
 

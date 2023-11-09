@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Session;
+use Doctrine\ORM\Query;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,6 +21,17 @@ class SessionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Session::class);
     }
+
+    public function listeSeancesComplete () : ?Query
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s')#, 'sa')// selection des tables | s seance |sa salle
+            #->leftJoin('s.salle', 'sa')
+            ->orderBy('s.id')
+            ->getQuery(); 
+    }
+
+
 
 //    /**
 //     * @return Session[] Returns an array of Session objects

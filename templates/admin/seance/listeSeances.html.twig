@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Salles | Admin{% endblock %}
+{% block title %}Liste des Séances | Admin{% endblock %}
 
 {% block body %}
-    <h1 class="pt-2 text-center">Gestion des Salles | Admin</h1>
+    <h1 class="pt-2 text-center">Gestion des Séances | Admin</h1>
 
         <!--bouton pour ajouter une salle-->
 
@@ -13,8 +13,10 @@
             <thead>
                 <tr>
                     <th scope="col-1">id</th>
-                    <th scope="col-2">nom</th>
-                    <th scope="col-1">capacité</th>
+                    <th scope="col-2">date</th>
+                    <th scope="col-1">heure</th>
+                    <th scope="col-1">film</th>
+                    <th scope="col-1">salle</th>
                     <th scope="col-2">Actions</th>
                 </tr>
             </thead>

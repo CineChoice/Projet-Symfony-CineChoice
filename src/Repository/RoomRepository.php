@@ -33,6 +33,14 @@ class RoomRepository extends ServiceEntityRepository
             ->getQuery(); 
     }
 
+    public function listeSallesCompleteAdmin () : ?Query
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s')// selection des tables | s salle
+            ->orderBy('s.id')
+            ->getQuery(); 
+    }
+
 //    /**
 //     * @return Room[] Returns an array of Room objects
 //     */

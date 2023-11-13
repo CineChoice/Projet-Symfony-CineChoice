@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1 class="pt-2 text-center">Gestion des Salles | Admin</h1>
+    <hr>
+    <div class="row pt-2">
 
         <!--bouton pour ajouter une salle-->
         <a href=" {{ path("admin_salle_ajout")}} " class="btn btn-info"><i class="fas fa-user-plus"></i> Ajouter une salle</a>
@@ -41,10 +43,11 @@
 
             </tbody>
         </table>
-    </div>
         <div class="navigation mx-auto">
             {{ knp_pagination_render(lesSalles) }}
         </div>
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}

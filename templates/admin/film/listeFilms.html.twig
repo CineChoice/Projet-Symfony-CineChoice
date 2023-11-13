@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1 class="pt-2 text-center">Gestion des Films | Admin</h1>
+    <hr>
+    <div class="row pt-2">
 
         <a href="{{path("admin_film_ajout")}}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter un film</a>
 
@@ -40,12 +42,13 @@
 
                 {% endfor %}
 
-                <div class="navigation mx-auto">
-                    {{ knp_pagination_render(lesFilms) }}
-                </div>
+
 
             </tbody>
         </table>
+        <div class="navigation mx-auto">
+            {{ knp_pagination_render(lesFilms) }}
+        </div>
     </div>
 {% endblock %}
 

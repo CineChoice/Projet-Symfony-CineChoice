@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1 class="pt-2 text-center">Gestion des Séances | Admin</h1>
+    <hr>
+    <div class="row pt-2">
 
         <a href=" {{ path("admin_seance_ajout")}} " class="btn btn-info"><i class="fas fa-user-plus"></i> Ajouter une seance</a>
 
@@ -44,10 +46,11 @@
 
             </tbody>
         </table>
-    </div>
         <div class="navigation mx-auto">
             {{ knp_pagination_render(lesSeances) }}
         </div>
+    </div>
+
 {% endblock %}
 
 

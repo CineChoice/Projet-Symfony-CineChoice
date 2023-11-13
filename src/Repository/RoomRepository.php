@@ -28,7 +28,8 @@ class RoomRepository extends ServiceEntityRepository
     public function listeSallesComplete () : ?Query
     {
         return $this->createQueryBuilder('s')
-            ->select('s')// selection des tables | s salle
+            ->select('s', 'se')// selection des tables | s salle
+            ->leftJoin('s.sessions', 'se')
             ->orderBy('s.id')
             ->getQuery(); 
     }
@@ -36,7 +37,8 @@ class RoomRepository extends ServiceEntityRepository
     public function listeSallesCompleteAdmin () : ?Query
     {
         return $this->createQueryBuilder('s')
-            ->select('s')// selection des tables | s salle
+            ->select('s', 'se')// selection des tables | s salle
+            ->leftJoin('s.sessions', 'se')
             ->orderBy('s.id')
             ->getQuery(); 
     }

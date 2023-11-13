@@ -12,6 +12,20 @@
 
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="card mb-3">
+            <h4 class="card-header" align="center">{{laSalle.nom}}</h4>
+            <div class="card-body">
+                <ul class="list-group list-group-flush text-left">
+                    <li class="list-group-item pl-4">capaciter : {{laSalle.capaciter}}.</li>
+                    <li class="list-group-item pl-4">Séance associé(s) : {% for laSeance in laSalle.sessions %} <span class="badge">{{laSeance.id}}</span> {% endfor %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {#
+
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+        <div class="card mb-3">
             <h4 class="card-header" align="center"><a href="">{{laSalle.nom}}</a></h4> 
 
             <div class="card-body text-center">
@@ -20,7 +34,7 @@
 
         </div>
     </div>
-
+#}
     {% endfor %} 
 
     <div class="navigation mx-auto">

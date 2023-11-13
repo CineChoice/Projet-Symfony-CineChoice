@@ -2,7 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Session;
+use App\Form\SeanceType;
 use App\Repository\SessionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,17 +28,48 @@ class SeanceController extends AbstractController
         ]);
     }
 
-    /*public function listeSeances(SessionRepository $repo): Response
+    #[Route('/admin/sceance/supr/{id}', name: 'admin_sceance_supr', methods: ['GET'])]
+    public function suprSceance(Session $seance, EntityManagerInterface $manager): Response
     {
-        $seances = $repo->findAll();
-        return $this->render('admin/seance/listeSeances.html.twig', ['lesSeances' => $seances,
-        ]);
+        
+        $manager->remove($seance);
+        $manager->flush();
+
+        $this->addFlash("success", "La seance a bien été supprimé!");
+     
+
+        return $this->redirectToRoute('admin_seances');
     }
-    /*public function index(): Response
-    {
-        return $this->render('admin/seance/index.html.twig', [
-            'controller_name' => 'SeanceController',
-        ]);
-    }
-    */
+
+
+        #[Route('/admin/seance/ajout', name: 'admin_seance_ajout', methods: ['GET', 'POST'])]
+        #[Route('/admin/seance/modif/{id}', name: 'admin_seance_modif', methods: ['GET', 'POST'])]
+        public function ajoutModifSceance(Session $seance = null, Request $request, EntityManagerInterface $manager): Response
+        {
+            if (!$seance) {
+                $seance = new Session(); // Initialisez une nouvelle instance de Film si $film est null
+                $mode = "ajouté";
+            } else {
+                $mode = "modifié";
+            }
+        
+            $form = $this->createForm(SeanceType::class, $seance); // provient du formulaire
+        
+            $form->handleRequest($request);
+        
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $manager->persist($seance);
+                $manager->flush();
+        
+                $this->addFlash("success", "La seance a bien été $mode!");
+        
+                return $this->redirectToRoute('admin_seances');
+            }
+        
+            return $this->render('admin/seance/formAjoutModifSeance.html.twig', [
+                'formSeance' => $form->createView(),
+            ]);
+        }
+
 }

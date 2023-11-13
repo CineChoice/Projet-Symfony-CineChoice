@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="pt-2 text-center">Gestion des Séances | Admin</h1>
 
-        <!--bouton pour ajouter une salle-->
+        <a href=" {{ path("admin_seance_ajout")}} " class="btn btn-info"><i class="fas fa-user-plus"></i> Ajouter une seance</a>
 
         <hr>
 
@@ -30,7 +30,13 @@
                             <td class="col-2">{{laSeance.heure}}</td>
                             <td class="col-2">{{laSeance.film.nom}}</td>
                             <td class="col-2">{{laSeance.salle.nom}}</td>
-                            <td class="col-2">test</td>
+                            <td class="col-2">
+                            
+                            <a href="{{path('admin_seance_modif', {'id': laSeance.id})}}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'une sceance" data-message="Êtes vous sûr de vouloir supprimer la sceance : {{laSeance.id}}" data-libelleBouton="Supprimer" data-lien="{{path('admin_sceance_supr', {'id': laSeance.id})}}"><i class="fa-regular fa-trash-can"></i></a>
+
+                            </td>
 
                 {% endfor %}
 

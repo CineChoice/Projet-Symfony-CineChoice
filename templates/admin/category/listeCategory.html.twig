@@ -7,32 +7,38 @@
     
     <div class="row pt-2">
 
-{#
+
         <!--bouton pour ajouter une salle-->
-        <a href=" {{ path("admin_salle_ajout")}} " class="btn btn-success mx-auto m-3"><i class="fas fa-plus"></i> Ajouter une salle</a>
+        <a href=" {{ path("admin_category_ajout")}} " class="btn btn-success mx-auto m-3"><i class="fas fa-plus"></i> Ajouter une categorie de film</a>
 
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col-3">nom</th>
-                    <th scope="col-3">capacité</th>
-                    <th scope="col-3">séance(s)</th>
-                    <th scope="col-3">Actions</th>
+                    <th scope="col-1">couleur</th>
+                    <th scope="col-6">description</th>
+                    <th scope="col-2">Actions</th>
                 </tr>
             </thead>
             <tbody>
 
-                {% for laSalle in lesSalles %}
+                {% for laCategory in lesCategory %}
 
                     <tr class="table-secondary">
-                        <td class="col-3">{{laSalle.nom}}</td>
-                        <td class="col-3">{{laSalle.capaciter}}</td>
-                        <td class="col-3">{% for laSeance in laSalle.sessions %} <span class="badge" style="background-color: black">N°{{laSeance.id}}</span> {% endfor %}</td>
-                        <td class="col-3">
+                        <td class="col-3">{{laCategory.nom}}</td>
 
-                        <a href="{{path('admin_salle_modif', {'id': laSalle.id})}}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <td class="col-1">
+                            
+                            <div style="width:2rem; height:1rem; background-color:{{laCategory.couleur}}"></div>
+                        
+                        </td>
 
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'une salle" data-message="Êtes vous sûr de vouloir supprimer la salle : {{laSalle.nom}}" data-libelleBouton="Supprimer" data-lien="{{path('admin_salle_supr', {'id': laSalle.id})}}"><i class="fa-regular fa-trash-can"></i></a>
+                        <td class="col-6">{{laCategory.description|slice(0,200)|raw}}...</td>
+                        <td class="col-2">
+
+                        <a href="{{path('admin_category_modif', {'id': laCategory.id})}}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'une category" data-message="Êtes vous sûr de vouloir supprimer la category : {{laCategory.nom}}" data-libelleBouton="Supprimer" data-lien="{{path('admin_category_supr', {'id': laCategory.id})}}"><i class="fa-regular fa-trash-can"></i></a>
                         
                         </td>
 
@@ -43,10 +49,10 @@
             </tbody>
         </table>
         <div class="navigation mx-auto">
-            {{ knp_pagination_render(lesSalles) }}
+            {{ knp_pagination_render(lesCategory) }}
         </div>
     </div>
-#}
+
 {% endblock %}
 
 {% block javascripts %}

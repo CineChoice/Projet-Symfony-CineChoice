@@ -17,13 +17,6 @@ class SalleType extends AbstractType
         $builder
             ->add('nom')
             ->add('capaciter')
-
-/*
-            ->add('seance', EntityType::class, [
-                'class'=>Session::class,
-                'choice_label'=>'nom',
-            ])
-*/
         ;
     }
 

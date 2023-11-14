@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Twig\Environment;
 use App\Repository\MovieRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FilmController extends AbstractController
 {
+    private $twig;
+
+    public function __construct(Environment $twig)
+    {
+        $this->twig = $twig;
+    }
+
+
     #[Route('/films', name: 'films', methods:['GET'])]
     public function listeFilms(MovieRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
@@ -23,5 +32,14 @@ class FilmController extends AbstractController
         return $this->render('film/listeFilms.html.twig', [
             'lesFilms' => $films
         ]);
+    }
+
+    #[Route('/films/{id}', name: 'film_fiche', methods:['GET'])]
+    public function ficheMovi(int $id, MovieRepository $repo): Response
+    {
+        $film = $repo->find($id);
+        return new Response($this->twig->render('film/ficheFilm.html.twig', [
+            'leFilm' => $film,
+        ]));
     }
 }

@@ -12,16 +12,43 @@
 
         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <div class="card mb-3">
-                <h4 class="card-header" align="center"><a href="">{{leFilm.nom}}</a></h4> {# {{path('ficheFilm', {'id': leFilm.id })}} #}
+                <h4 class="card-header"><a href="{{path('film_fiche', {'id': leFilm.id})}}">{{leFilm.nom}}</a></h4>
                 <div class="card-body">
-                </div>
-                <img class="avatar mx-auto d-block" style="height: 450px; width: 318px; display: block;" src="{{asset("images/affiches/" ~ leFilm.affiche)}}" alt="Affiche du film">
-                <div class="card-body">
-                    <p class="card-text">{{leFilm.description|slice(0,200)|raw}}...</p>
+
+                
+
+                <img class="avatar mx-auto d-block" style="height: auto; width: 15rem; display: block;" src="{{asset("images/affiches/" ~ leFilm.affiche)}}" alt="Affiche du film">
+
+                    
+
+                    {% for laCategorie in leFilm.categories %} <span class="badge m-2" style="background-color: {{laCategorie.couleur}}; color:black; font-size: 1rem;">{{laCategorie.nom}}</span> {% endfor %}      
+                
+                    <p class="card-text m-2">{{leFilm.description|slice(0,100)|raw}}...</p>
                 </div>
                 <ul class="list-group list-group-flush">
+
                     <li class="list-group-item">Le film est sotie en {{leFilm.date}}</li>
-                    <li class="list-group-item">{% for laSeance in leFilm.sessions %} <span class="badge">Le film sera difuser à la séance n°{{laSeance.id}}</span> {% endfor %}</li>
+
+                    <li class="list-group-item">
+
+                        {% if leFilm.sessions|length == 0 %}
+                            Pas de séance de projection pour ce film
+                        {% else %}
+                            {% if leFilm.sessions|length > 1 %}
+                                Le film sera diffusé aux séances :
+                            {% else %}
+                                Le film sera diffusé à la séance :
+                            {% endif %}
+                                {% for laSeance in leFilm.sessions %} 
+                                    <span class="badge" style="background-color: black; font-size:1rem;">
+                                        <a href="{{path('seance_fiche', {'id': laSeance.id})}}">
+                                            N°{{laSeance.id}}
+                                        </a>
+                                    </span> 
+                                {% endfor %}
+                        {% endif %}
+
+                    </li>
                 </ul>
             </div>
         </div>

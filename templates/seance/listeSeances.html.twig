@@ -12,13 +12,39 @@
 
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                 <div class="card mb-3">
-                    <h4 class="card-header" align="center">N°{{laSeance.id}}</h4>
+                    <h4 class="card-header"><a href="{{path('seance_fiche', {'id': laSeance.id})}}">N°{{laSeance.id}}</a></h4>
                     <div class="card-body">
                         <ul class="list-group list-group-flush text-left">
-                            <li class="list-group-item pl-4"><i class="fas fa-video"></i> : {{laSeance.film.nom}}.</li>
-                            <li class="list-group-item pl-4"><i class="fas fa-map-marker-alt"></i> : {{laSeance.salle.nom}}.</li>
-                            <li class="list-group-item pl-4"><i class="far fa-calendar-alt"></i> : {{laSeance.date}}.</li>
-                            <li class="list-group-item pl-4"><i class="far fa-clock"></i> : {{laSeance.heure}}.</li>
+
+                            <li class="list-group-item pl-4">
+
+                                <a href="{{path('film_fiche', {'id': laSeance.film.id})}}">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img 
+                                            class="avatar mx-auto d-block" 
+                                            style="height: auto; width: 80px; display: block;" 
+                                            src="{{ asset('images/affiches/' ~ laSeance.film.affiche) }}" 
+                                            alt="Affiche du film">
+                                        </div>
+
+                                        <div class="col-8 d-flex justify-content-center align-items-center">
+                                            <p style = "font-size: 1.3rem;">{{laSeance.film.nom}}</p>
+                                        </div>
+                                    </div>
+                                </a>           
+                                
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col"><i class="far fa-calendar-alt"></i> : {{laSeance.date}}</div>
+                                    <div class="col"><i class="far fa-clock"></i> : {{laSeance.heure}}</div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item text-center"><i class="fas fa-map-marker-alt"></i> : {{laSeance.salle.nom}}</li>                   
+
                         </ul>
                     </div>
                 </div>

@@ -22,7 +22,8 @@ class SeanceType extends AbstractType
             ])
 
             ->add('heure', TimeType::class,[
-                'input'=>'string',
+                'input_format' => 'H:i',
+                'input'=>'string'
             ])
 
             ->add('film', EntityType::class, [

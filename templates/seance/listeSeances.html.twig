@@ -42,8 +42,8 @@
                                     <div class="col"><i class="far fa-clock"></i> : {{laSeance.heure}}</div>
                                 </div>
                             </li>
-
-                            <li class="list-group-item text-center"><i class="fas fa-map-marker-alt"></i> : {{laSeance.salle.nom}}</li>                   
+                            <a href="{{path('salle_fiche', {'id': laSeance.salle.id})}}"><li class="list-group-item text-center"><i class="fas fa-map-marker-alt"></i> : {{laSeance.salle.nom}}</li>                   </a>
+                            
 
                         </ul>
                     </div>

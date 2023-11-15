@@ -8,11 +8,11 @@
 <hr>
 <div class="row pt-2">
 
-    {% for laSalle in lesSalles %}
+    {% for key, laSalle in lesSalles %}
 
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="card mb-3">
-            <h4 class="card-header" align="center">{{laSalle.nom}}</h4>
+            <h4 class="card-header" align="center"> <a href="{{path('salle_fiche', {'id': laSalle.id})}}">{{laSalle.nom}}</a></h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush text-left">
                     <li class="list-group-item pl-4">capaciter : {{laSalle.capaciter}}.</li>

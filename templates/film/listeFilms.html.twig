@@ -15,11 +15,9 @@
                 <h4 class="card-header"><a href="{{path('film_fiche', {'id': leFilm.id})}}">{{leFilm.nom}}</a></h4>
                 <div class="card-body">
 
-                
-
+                <a href="{{path('film_fiche', {'id': leFilm.id})}}">
                 <img class="avatar mx-auto d-block" style="height: auto; width: 15rem; display: block;" src="{{asset("images/affiches/" ~ leFilm.affiche)}}" alt="Affiche du film">
-
-                    
+                </a>
 
                     {% for laCategorie in leFilm.categories %} <span class="badge m-2" style="background-color: {{laCategorie.couleur}}; color:black; font-size: 1rem;">{{laCategorie.nom}}</span> {% endfor %}      
                 

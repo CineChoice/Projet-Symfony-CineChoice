@@ -21,17 +21,17 @@ class Category
     #[ORM\Column(length: 255)]
     #[NotBlank(message:"Le nom est obligatoir est obligatoire!")]
     #[Length(
-        min : 5,
+        min : 10,
         max : 255,
-        minMessage : "Le nom doit comporter au minimum {{ limit }} caractère !",
+        minMessage : "Le nom doit comporter au minimum {{ limit }} caractère ! {{ value }} ",
         maxMessage : "Le nom doit comporter au maximum {{ limit }} caractère !",
     )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[NotBlank(message:"La description est obligatoir est obligatoire!")]
+    #[NotBlank(message:"La description est obligatoire!")]
     #[Length(
-        min : 1,
+        min : 2,
         max : 255,
         minMessage : "La description doit comporter au minimum {{ limit }} caractère !",
         maxMessage : "La description doit comporter au maximum {{ limit }} caractère !",

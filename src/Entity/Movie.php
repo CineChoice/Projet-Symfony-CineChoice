@@ -49,6 +49,7 @@ class Movie
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La durée est obligatoire!")]
     private ?string $duree = null;
 
     public function __construct()

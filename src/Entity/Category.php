@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -16,9 +19,23 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message:"Le nom est obligatoir est obligatoire!")]
+    #[Length(
+        min : 5,
+        max : 255,
+        minMessage : "Le nom doit comporter au minimum {{ limit }} caractère !",
+        maxMessage : "Le nom doit comporter au maximum {{ limit }} caractère !",
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[NotBlank(message:"La description est obligatoir est obligatoire!")]
+    #[Length(
+        min : 1,
+        max : 255,
+        minMessage : "La description doit comporter au minimum {{ limit }} caractère !",
+        maxMessage : "La description doit comporter au maximum {{ limit }} caractère !",
+    )]
     private ?string $description = null;
 
     #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'categories')]

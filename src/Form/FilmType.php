@@ -21,7 +21,7 @@ class FilmType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => "Titre du film",
+                'label' => "Titre du film wow",
                 'required' => false,
                 'attr' => [
                     "placeholder" => "Saisir le titre du film"
@@ -48,8 +48,9 @@ class FilmType extends AbstractType
             ])
             ->add('date', IntegerType::class, [
                 'label'=>"Date de sortie",
+                'required'=>false,
                 'attr'=>[
-                    'required'=>false,
+                    
                     "placeholder"=>"Saisir la date de sortie du film"
                 ]
             ])
@@ -57,13 +58,14 @@ class FilmType extends AbstractType
                 'class'=>Category::class,
                 'choice_label'=>'nom',
                 'label' => "Catégorie(s) associées",
-                'required'=>false,
                 'multiple' => true,
                 'by_reference'=>false,
-                'attr'=>[
-                    'class'=>"selectStyles",
+                'required'=>false,
+                'attr'=>[ 
+                    'class'=>"selectStyles",  
                 ]
             ])
+
             ->add('sessions', EntityType::class, [
                 'class'=>Session::class,
                 'choice_label'=>'id',
@@ -83,6 +85,7 @@ class FilmType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Movie::class,
+            
         ]);
     }
 }

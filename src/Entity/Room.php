@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\RoomRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RoomRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 class Room
@@ -15,10 +19,14 @@ class Room
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
+    #[NotBlank(message:"Le nom est obligatoire!")]
     private ?string $nom = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: false)]
+    #[NotBlank(message:"La capacité est obligatoire!")]
+    #[GreaterThanOrEqual(value: 1, message: "La valeur doit être au moins égale à 1.")]
+
     private ?int $capaciter = null;
 
     #[ORM\OneToMany(mappedBy: 'salle', targetEntity: Session::class)]

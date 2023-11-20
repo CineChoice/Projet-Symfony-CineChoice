@@ -29,11 +29,33 @@ class SeanceType extends AbstractType
             ->add('film', EntityType::class, [
                 'class'=>Movie::class,
                 'choice_label'=>'nom',
+                'label' => "Film associé",
+                'by_reference'=>false,
+                'attr'=>[
+                    'class'=>"selectStyles",
+                ]
             ])
+
+            /*->add('film', EntityType::class, [
+                'class'=>Movie::class,
+                'choice_label'=>'nom',
+                'label' => "film associées",
+                'required'=>false,
+                'multiple' => true,
+                'by_reference'=>false,
+                'attr'=>[
+                    'class'=>"selectStyles",
+                ]
+            ])*/
+        
 
             ->add('salle', EntityType::class, [
                 'class'=>Room::class,
                 'choice_label'=>'nom',
+                'label' => "Salle associée",
+                'attr'=>[
+                    'class'=>"selectStyles",
+                ]
             ])
         ;
     }

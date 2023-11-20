@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -22,12 +24,15 @@ class Session
     private ?string $heure = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
+
     private ?Movie $film = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[NotBlank(message:"Le film associé est obligatoire!")]
     private ?Room $salle = null;
 
     #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Reservation::class)]
+    #[NotBlank(message:"La salle associé est obligatoire!")]
     private Collection $reservations;
 
     public function __construct()

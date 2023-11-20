@@ -25,8 +25,8 @@ class Movie
     #[Assert\Length(
         min : 10,
         max : 255,
-        minMessage : "La description doit comporter au minimum {{ limit }}!",
-        maxMessage : "La description doit comporter au maximum {{ limit }}!",
+        minMessage : "La description doit comporter au minimum {{ limit }} caractère !",
+        maxMessage : "La description doit comporter au maximum {{ limit }} caractère !",
     )]
     private ?string $description = null;
 

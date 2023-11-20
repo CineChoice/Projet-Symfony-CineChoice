@@ -77,7 +77,8 @@ class FilmType extends AbstractType
                     'class'=>"selectStyles",
                 ]
             ])
-        ;
+
+
         ;
     }
 

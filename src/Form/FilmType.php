@@ -58,6 +58,14 @@ class FilmType extends AbstractType
                     "placeholder"=>"Saisir la date de sortie du film"
                 ]
             ])
+            ->add('duree', TextType::class, [
+                'label'=>"Durée du film",
+                'required'=>false,
+                'attr'=>[
+                    
+                    "placeholder"=>"Saisir la durée du film (ex: 2h10)"
+                ]
+            ])
             ->add('categories', EntityType::class, [
                 'class'=>Category::class,
                 'choice_label'=>'nom',

@@ -34,12 +34,12 @@ class Movie
     #[Assert\NotBlank(message:"L'Affiche est obligatoire!")]
     private ?string $affiche = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"La date est obligatoire!")]
-    private ?int $date = null;
+    private ?string $date = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'movies')]
-    #[Assert\NotBlank(message:"Les Catégories associées sont obligatoire!")]
+    #[Assert\NotBlank(message:"Les Catégories sont obligatoire!")]
     private Collection $categories;
 
     #[ORM\OneToMany(mappedBy: 'film', targetEntity: Session::class)]
@@ -47,6 +47,9 @@ class Movie
 
     #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $duree = null;
 
     public function __construct()
     {
@@ -178,6 +181,18 @@ class Movie
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getDuree(): ?string
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(string $duree): static
+    {
+        $this->duree = $duree;
 
         return $this;
     }

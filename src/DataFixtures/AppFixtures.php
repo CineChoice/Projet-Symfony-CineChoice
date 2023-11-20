@@ -26,7 +26,8 @@ class AppFixtures extends Fixture
                         ->setNom($value[1])
                         ->setDescription($value[2])
                         ->setAffiche($value[3])
-                        ->setDate(intval($value[4]));
+                        ->setDate(intval($value[4]))
+                        ->setDuree($value[5]);
                         $manager->persist($film);
             $this->addReference("film".$film->getId(),$film);
         }

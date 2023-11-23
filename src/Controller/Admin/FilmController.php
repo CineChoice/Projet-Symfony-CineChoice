@@ -79,12 +79,9 @@ class FilmController extends AbstractController
         #[Route('/admin/film/supr/{id}', name: 'admin_film_supr', methods: ['GET'])]
         public function suprFilm(Movie $film, EntityManagerInterface $manager): Response
         {
-            $nbCategory = $film->getcategories()->count();
             $nbSession = $film->getSessions()->count();
-    
-            if ($nbCategory > 0) {
-                $this->addFlash("danger", "Vous ne pouvez pas supprimer ce film car $nbCategory Catégorie(s) y sont associés!");
-            } else if ($nbSession > 0) {
+
+            if ($nbSession > 0) {
                 $this->addFlash("danger", "Vous ne pouvez pas supprimer ce film car $nbSession Séance(s) y sont associés!");
             } else {
                 $manager->remove($film);

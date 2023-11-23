@@ -6,6 +6,7 @@ use App\Entity\Movie;
 use App\Entity\Session;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,6 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FilmType extends AbstractType
 {
@@ -52,6 +56,14 @@ class FilmType extends AbstractType
                 'attr'=>[
                     
                     "placeholder"=>"Saisir la date de sortie du film"
+                ]
+            ])
+            ->add('duree', TextType::class, [
+                'label'=>"Durée du film",
+                'required'=>false,
+                'attr'=>[
+                    
+                    "placeholder"=>"Saisir la durée du film (ex: 2h10)"
                 ]
             ])
             ->add('categories', EntityType::class, [

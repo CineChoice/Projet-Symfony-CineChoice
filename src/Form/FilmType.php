@@ -10,14 +10,16 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FilmType extends AbstractType
 {
@@ -25,7 +27,7 @@ class FilmType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => "Titre du film wow",
+                'label' => "Titre du film",
                 'required' => false,
                 'attr' => [
                     "placeholder" => "Saisir le titre du film"
@@ -50,22 +52,39 @@ class FilmType extends AbstractType
                     'class'=>"d-none"
                 ]
             ])
+
             ->add('date', IntegerType::class, [
                 'label'=>"Date de sortie",
                 'required'=>false,
                 'attr'=>[
-                    
-                    "placeholder"=>"Saisir la date de sortie du film"
+                    "placeholder"=>"Saisir la date de sortie du film (ex: 2012)"
                 ]
             ])
+
+           /* ->add('date', DateType::class,[
+                //'input' => 'string',
+                'label' => 'date de sortie du film',
+            ])*/
+            
             ->add('duree', TextType::class, [
                 'label'=>"Durée du film",
                 'required'=>false,
                 'attr'=>[
-                    
                     "placeholder"=>"Saisir la durée du film (ex: 2h10)"
                 ]
             ])
+
+            /*->add('duree', TimeType::class,[
+                'label'=>"Durée du film",
+                //'input_format' => 'H:i',
+                'input'=>'string',
+                //'placeholder' => 'Select a value',
+                'placeholder' => [
+                    'hour' => 'Hour', 'minute' => 'Minute',
+                ],
+            ])*/
+
+
             ->add('categories', EntityType::class, [
                 'class'=>Category::class,
                 'choice_label'=>'nom',
@@ -74,7 +93,7 @@ class FilmType extends AbstractType
                 'by_reference'=>false,
                 'required'=>false,
                 'attr'=>[ 
-                    'class'=>"selectStyles",  
+                    'class'=>"selectStyles",
                 ]
             ])
 

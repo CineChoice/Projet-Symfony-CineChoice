@@ -18,9 +18,11 @@ class Session
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message:"La date associé est obligatoire!")]
     private ?string $date = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message:"L' heure associé est obligatoire!")]
     private ?string $heure = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]

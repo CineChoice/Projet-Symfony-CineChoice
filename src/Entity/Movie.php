@@ -16,12 +16,12 @@ class Movie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
     #[Assert\NotBlank(message: "Le titre est obligatoire!")]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank(message:"La description est obligatoire!")]
+    #[ORM\Column(length: 255, nullable: false)]
+    #[Assert\NotBlank(message:"La description est obligatoire!")] // la description n'ets pas obligatoire !!
     #[Assert\Length(
         min : 10,
         max : 255,
@@ -30,11 +30,12 @@ class Movie
     )]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"L'Affiche est obligatoire!")]
+    #[ORM\Column(length: 255, nullable: false)] 
+    // l'affiche n'est pas obligatoire 
+    //#[Assert\NotBlank(message:"L'Affiche est obligatoire!")] // ajouter une affiche n'est pas obligatoire puisque l'affiche par defaut lui sera associé 
     private ?string $affiche = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
     #[Assert\NotBlank(message:"La date est obligatoire!")]
     private ?string $date = null;
 
@@ -48,7 +49,7 @@ class Movie
     #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
     #[Assert\NotBlank(message:"La durée est obligatoire!")]
     private ?string $duree = null;
 

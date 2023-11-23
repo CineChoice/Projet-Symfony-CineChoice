@@ -6,6 +6,7 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -14,9 +15,23 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('description',TextareaType::class)
-            ->add('couleur',ColorType::class)
+            ->add('nom', TextType::class, [
+                'label'=>'Nom de la catégorie',
+                'attr' => [
+                    "placeholder" => "saisir le nom de la catégorie"
+                ]
+            ])
+
+            ->add('description',TextareaType::class,[
+                'label' => "Description de la catégorie",
+                'attr' => [
+                    "placeholder" => "saisir la description de la catégorie"
+                ]
+            ])
+
+            ->add('couleur',ColorType::class,[
+                'label' => "Couleur associé à la catégorie"
+            ])
         ;
     }
 

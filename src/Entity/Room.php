@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RoomRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\Nullable;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
@@ -21,11 +23,17 @@ class Room
 
     #[ORM\Column(length: 255, nullable: false)]
     #[NotBlank(message:"Le nom est obligatoire!")]
+    #[Length(
+        min : 2,
+        max : 255,
+        minMessage : "Le nom doit comporter au minimum {{ limit }} caractères !",
+        maxMessage : "Le nom doit comporter au maximum {{ limit }} caractères !",
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(nullable: false)]
     #[NotBlank(message:"La capacité est obligatoire!")]
-    #[GreaterThanOrEqual(value: 1, message: "La valeur doit être au moins égale à 1.")]
+    #[GreaterThanOrEqual(value: 1, message: "La valeur doit au moins être égale à 1.")]
 
     private ?int $capaciter = null;
 

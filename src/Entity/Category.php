@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -18,27 +19,27 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[NotBlank(message:"Le nom est obligatoir est obligatoire!")]
+    #[ORM\Column(length: 255, nullable: false)]
+    #[NotBlank(message:"Le nom est obligatoire est obligatoire!")]
     #[Length(
-        min : 10,
+        min : 2,
         max : 255,
-        minMessage : "Le nom doit comporter au minimum {{ limit }} caractère ! {{ value }} ",
-        maxMessage : "Le nom doit comporter au maximum {{ limit }} caractère !",
+        minMessage : "Le nom doit comporter au minimum {{ limit }} caractères !",
+        maxMessage : "Le nom doit comporter au maximum {{ limit }} caractères !",
     )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[NotBlank(message:"La description est obligatoire!")]
+    //#[NotBlank(message:"La description est obligatoire!")] la description n'est pas obligatoire !
     #[Length(
         min : 2,
         max : 255,
-        minMessage : "La description doit comporter au minimum {{ limit }} caractère !",
-        maxMessage : "La description doit comporter au maximum {{ limit }} caractère !",
+        minMessage : "La description doit comporter au minimum {{ limit }} caractères !",
+        maxMessage : "La description doit comporter au maximum {{ limit }} caractères !",
     )]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'categories')] 
     private Collection $movies;
 
     #[ORM\Column(length: 255, nullable: true)]

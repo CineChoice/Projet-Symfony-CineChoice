@@ -19,11 +19,13 @@ class SeanceType extends AbstractType
         $builder
             ->add('date', DateType::class,[
                 'input'=>'string',
+                'label' => 'date de la séance'
             ])
 
             ->add('heure', TimeType::class,[
                 'input_format' => 'H:i',
-                'input'=>'string'
+                'input'=>'string',
+                'label' => 'heure de la séance'
             ])
 
             ->add('film', EntityType::class, [
@@ -35,6 +37,7 @@ class SeanceType extends AbstractType
                     'class'=>"selectStyles",
                 ]
             ])
+
 
             /*->add('film', EntityType::class, [
                 'class'=>Movie::class,

@@ -25,7 +25,7 @@
         {{form_row(formFilm.duree)}}
         {{form_row(formFilm.date)}}
         {{form_row(formFilm.categories)}}
-        {{form_row(formFilm.sessions)}}
+        {#{{form_row(formFilm.sessions)}}#} {#c'est dans les sé nce qu'on choisi le film#}
     </div>
     <div class="col-4">
         <img src=" {{asset("images/affiches/" ~ formFilm.affiche.vars.value)}} " id="afficheAffichee" alt="Affiche du film" class="rounded mx-auto d-block img-thumbnail mb-2" style="height: 450px; width: 318px; display: block;">

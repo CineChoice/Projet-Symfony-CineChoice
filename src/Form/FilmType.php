@@ -97,7 +97,7 @@ class FilmType extends AbstractType
                 ]
             ])
 
-            ->add('sessions', EntityType::class, [
+            /*->add('sessions', EntityType::class, [
                 'class'=>Session::class,
                 'choice_label'=>'id',
                 'label' => "Séance(s) associées",
@@ -107,7 +107,7 @@ class FilmType extends AbstractType
                 'attr'=>[
                     'class'=>"selectStyles",
                 ]
-            ])
+            ])*/ // la séance associer au film choisi lors de la création de la séance, pas lors de la création du film
 
 
         ;

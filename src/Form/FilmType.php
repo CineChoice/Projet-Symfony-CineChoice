@@ -63,7 +63,7 @@ class FilmType extends AbstractType
                 'required'=>false,
                 'attr'=>[
                     
-                    "placeholder"=>"Saisir la durée du film (ex: 2h10)"
+                    "placeholder"=>"Saisir la durée du film (ex: 2:04)"
                 ]
             ])
             ->add('categories', EntityType::class, [

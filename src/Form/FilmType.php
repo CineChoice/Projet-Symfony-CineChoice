@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Movie;
 use App\Entity\Session;
 use App\Entity\Category;
+use App\Repository\CategoryRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,6 +62,12 @@ class FilmType extends AbstractType
                 ]
             ])
 
+            /*->add('date', DateType::class,[
+                'input'=>'string',
+                'label' => 'date de sortie'
+            ])*/
+
+
            /* ->add('date', DateType::class,[
                 //'input' => 'string',
                 'label' => 'date de sortie du film',
@@ -73,6 +80,12 @@ class FilmType extends AbstractType
                     "placeholder"=>"Saisir la durée du film (ex: 2h10)"
                 ]
             ])
+
+            /*->add('duree', TimeType::class,[
+                'input_format' => 'H:i',
+                'input'=>'string',
+                'label' => 'Durée du film'
+            ])*/
 
             /*->add('duree', TimeType::class,[
                 'label'=>"Durée du film",
@@ -88,6 +101,10 @@ class FilmType extends AbstractType
             ->add('categories', EntityType::class, [
                 'class'=>Category::class,
                 'choice_label'=>'nom',
+                'query_builder' => function (CategoryRepository $er) {
+                    return $er->createQueryBuilder('r')
+                        ->orderBy('r.nom', 'ASC'); // Tri par le champ 'nom' en ordre alphabétique
+                },
                 'label' => "Catégorie(s) associées",
                 'multiple' => true,
                 'by_reference'=>false,

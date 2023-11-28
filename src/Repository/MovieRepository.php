@@ -33,16 +33,19 @@ class MovieRepository extends ServiceEntityRepository
        ;
    }
 
-   public function listeFilmsCompleteAdmin()
+   public function listeFilmsCompleteAdmin($nom) : ?Query
    {
-       return $this->createQueryBuilder('f')
+       $query = $this->createQueryBuilder('f')
            ->select('f', 'c', 's')
            ->leftJoin('f.categories', 'c')
            ->leftJoin('f.sessions', 's')
-           ->orderBy('f.nom', 'ASC')
-           ->getQuery()
-           ->getResult()
+           ->orderBy('f.nom', 'ASC');
+           if($nom != null){
+                $query->andWhere('f.nom like :nomChercher')
+                ->setParameter('nomChercher', "%{$nom}%");
+           }
        ;
+       return $query->getQuery();
    }
 
 //    public function findOneBySomeField($value): ?Movie

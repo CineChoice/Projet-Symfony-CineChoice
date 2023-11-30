@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Category;
 use Doctrine\ORM\Query;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Category;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 
 /**
@@ -18,13 +19,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
-    
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
     }
     
-
     public function listeCategoryCompleteAdmin () : ?Query
     {
         return $this->createQueryBuilder('c')
@@ -32,6 +31,12 @@ class CategoryRepository extends ServiceEntityRepository
             ->orderBy('c.nom')
             ->getQuery(); 
     }
+    
+    public function listeCategorySimple():QueryBuilder{
+        return $this->createQueryBuilder('c')
+                    ->orderBy('c.nom', 'ASC');
+    }
+
 
 //    /**
 //     * @return Category[] Returns an array of Category objects

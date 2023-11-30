@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Movie;
 use Doctrine\ORM\Query;
+use App\Model\FiltreFilmAdmin;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -33,17 +34,21 @@ class MovieRepository extends ServiceEntityRepository
        ;
    }
 
-   public function listeFilmsCompleteAdmin($nom) : ?Query
+   public function listeFilmsCompleteAdmin(FiltreFilmAdmin $filtre = null) : ?Query
    {
        $query = $this->createQueryBuilder('f')
            ->select('f', 'c', 's')
            ->leftJoin('f.categories', 'c')
            ->leftJoin('f.sessions', 's')
            ->orderBy('f.nom', 'ASC');
-           if($nom != null){
+           if(!empty($filtre->nom)){
                 $query->andWhere('f.nom like :nomChercher')
-                ->setParameter('nomChercher', "%{$nom}%");
-           }
+                ->setParameter('nomChercher', "%{$filtre->nom}%");
+        }
+           if(!empty($filtre->category)){
+            $query->andWhere(':categoryChercher MEMBER OF f.categories')
+            ->setParameter('categoryChercher', $filtre->category);
+        }
        ;
        return $query->getQuery();
    }

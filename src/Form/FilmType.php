@@ -53,19 +53,19 @@ class FilmType extends AbstractType
                     'class'=>"d-none"
                 ]
             ])
-
+/*
             ->add('date', IntegerType::class, [
                 'label'=>"Date de sortie",
                 'required'=>false,
                 'attr'=>[
                     "placeholder"=>"Saisir la date de sortie du film (ex: 2012)"
                 ]
-            ])
+            ])*/
 
-            /*->add('date', DateType::class,[
+            ->add('date', DateType::class,[
                 'input'=>'string',
                 'label' => 'date de sortie'
-            ])*/
+            ])
 
 
            /* ->add('date', DateType::class,[
@@ -73,20 +73,21 @@ class FilmType extends AbstractType
                 'label' => 'date de sortie du film',
             ])*/
             
-            ->add('duree', TextType::class, [
+            /*->add('duree', TextType::class, [
                 'label'=>"Durée du film",
                 'required'=>false,
                 'attr'=>[
                     
                     "placeholder"=>"Saisir la durée du film (ex: 2:04)"
                 ]
-            ])
+            ])*/
 
-            /*->add('duree', TimeType::class,[
+            ->add('duree', TimeType::class,[
                 'input_format' => 'H:i',
                 'input'=>'string',
-                'label' => 'Durée du film'
-            ])*/
+                'label' => 'Durée du film',
+                'hours' => range(0, 10),
+            ])
 
             /*->add('duree', TimeType::class,[
                 'label'=>"Durée du film",

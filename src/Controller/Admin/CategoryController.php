@@ -44,14 +44,19 @@ class CategoryController extends AbstractController
     {
         $nbFilm = $category->getMovies()->count();
 
-        if ($nbFilm > 0) {
+        /*if ($nbFilm > 0) {
             $this->addFlash("danger", "Vous ne pouvez pas supprimer cette category car $nbFilm film(s) y sont associés !");
         } else {
             $manager->remove($category);
             $manager->flush();
 
             $this->addFlash("success", "La category a bien été supprimé!");
-        }
+        }*/
+
+        $manager->remove($category);
+        $manager->flush();
+
+        $this->addFlash("success", "La category a bien été supprimé!");
 
         return $this->redirectToRoute('admin_category');
     }
@@ -78,7 +83,7 @@ class CategoryController extends AbstractController
             $manager->persist($category);
             $manager->flush();
     
-            $this->addFlash("success", "La category a bien été $mode!");
+            $this->addFlash("success", "La categorie a bien été $mode!");
     
             return $this->redirectToRoute('admin_category');
         }

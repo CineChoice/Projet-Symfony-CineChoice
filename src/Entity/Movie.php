@@ -109,12 +109,12 @@ class Movie
         return $this;
     }
 
-    public function getDate(): ?int
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(int $date): static
+    public function setDate(string $date): static
     {
         $this->date = $date;
 

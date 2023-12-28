@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Movie;
 use App\Form\FilmType;
 use App\Form\FiltreMovieType;
+use App\Model\FiltreFilmAdmin;
 use App\Repository\MovieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,17 +19,12 @@ class FilmController extends AbstractController
         #[Route('/admin/films', name: 'admin_films', methods:['GET'])]
         public function listeFilms(MovieRepository $repo, PaginatorInterface $paginator, Request $request): Response
         {
-            $nom=null;
-            $formFiltreMovieAdmin=$this->createForm(FiltreMovieType::class);
+            $filtre = new FiltreFilmAdmin();
+            $formFiltreMovieAdmin=$this->createForm(FiltreMovieType::class, $filtre);
             $formFiltreMovieAdmin->handleRequest($request);
 
-            if($formFiltreMovieAdmin->isSubmitted() && $formFiltreMovieAdmin->isValid()){
-                // Récupération de la saisie dans le formulaire du nom
-                $nom=$formFiltreMovieAdmin->get('nom')->getData();
-            }
-
             $films = $paginator->paginate(
-                $repo->listeFilmsCompleteAdmin($nom),
+                $repo->listeFilmsCompleteAdmin($filtre),
                 $request->query->getInt('page', 1), 
                 9
             );

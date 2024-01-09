@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hey ! Bienvenue sur la page de connetion{% endblock %}
+{% block title %}Bienvenue sur la page de connetion{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -14,10 +14,10 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous !</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
     <film for="inputEmail">Email</film>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <film for="inputPassword">Password</film>
+    <film for="inputPassword">Mot de passe</film>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"

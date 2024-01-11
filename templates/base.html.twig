@@ -61,7 +61,8 @@
 
                     <li>
                         {% if app.user != null %}
-                            <a href="{{path('app_logout')}}"><button type="button" class="btn btn-outline-secondary">Se déconnecter</button></a>  
+                            <a href="{{path('app_logout')}}"><button type="button" class="btn btn-outline-secondary">Se déconnecter</button></a>
+                            <a href="{{path('user')}}"><button type="button" class="btn btn-outline-secondary">Profil</button></a> 
 
                         {% else %}
                             <a href="{{path('app_login')}}"><button type="button" class="btn btn-outline-secondary">Se connecter</button></a>  

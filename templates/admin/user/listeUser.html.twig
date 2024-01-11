@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs | Admin{% endblock %}
+
+{% block body %}
+    <h1 class="pt-2 text-center">Gestion des Utilisateur | Admin</h1>
+    
+    <div class="row pt-2">
+
+        
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col-2">Nom</th>
+                    <th scope="col-2">Prenom</th>
+                    <th scope="col-4">Adresse mail</th>
+                    <th scope="col-2">Role</th>
+                    <th scope="col-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for leUser in lesUsers %}
+
+                        <tr class="table-secondary">
+                            <td class="col-2">{{leUser.nom}}</td>
+                            <td class="col-2">{{leUser.prenom}}</td>
+                            <td class="col-4">{{leUser.email}}</td>
+
+                            <td class="col-2">
+                            
+                            ici le role du user
+                            
+                            </td>
+
+
+                            <td class="col-2">
+                            
+                                C
+                            </td>
+
+                {% endfor %}
+
+ 
+
+            </tbody>
+        </table>
+        <div class="navigation mx-auto">
+            {{ knp_pagination_render(lesUsers) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {% include "include/_modale.html.twig" %}
+{% endblock %}

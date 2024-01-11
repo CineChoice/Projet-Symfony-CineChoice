@@ -2,11 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use Faker\Factory;
-use App\Entity\Movie;
 use App\Entity\Room;
+use App\Entity\User;
+use App\Entity\Movie;
 use App\Entity\Session;
+use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -64,7 +65,19 @@ class AppFixtures extends Fixture
             $manager->persist($Seance);
             $this->addReference("seance".$Seance->getId(),$Seance);
         }
+/*
+        $admin = new User();
+        $admin  ->setNom("Admin")
+                ->setPrenom("Root")
+                ->setEmail("admin@gmail.com")
+                ->setIsVerified(true)
+                ->setRoles(['ROLE_ADMIN'])
+                ->setPassword( $this->userPassword->hashPassword(
+                    $admin,
+                    "voyage59"
+                ));
 
+*/
         $manager->flush();
     }
 

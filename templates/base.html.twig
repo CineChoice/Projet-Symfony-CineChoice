@@ -33,6 +33,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('salles')}}">Liste des salles</a>
                     </li>
+
+
+                    {% if app.user != null %}
+                    {% if  app.user.roles[0] == "ROLE_ADMIN" %}
+                        
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench"></i> Administration</a>
                         <div class="dropdown-menu">
@@ -41,10 +46,38 @@
                             <a class="dropdown-item" href="{{path('admin_films')}}">Gestion des films</a>
                             <a class="dropdown-item" href="{{path('admin_seances')}}">Gestion des séances</a>
                             <a class="dropdown-item" href="{{path('admin_category')}}">Gestion des categories</a>
-                            <a class="dropdown-item" href="{{path('admin_user')}}">Gestion des utilisateurs</a>
+                            <a class="dropdown-item" href="{{path('admin_user')}}">Liste des utilisateurs</a>
                         </div>
                     </li>
+
+                    {% endif %}
+                        
+                    {% endif %}
+
+                    
                 </ul>
+
+                <ul class="navbar-nav my-auto">
+
+                    <li>
+                        {% if app.user != null %}
+                            <a href="{{path('app_logout')}}"><button type="button" class="btn btn-outline-secondary">Se déconnecter</button></a>  
+
+                        {% else %}
+                            <a href="{{path('app_login')}}"><button type="button" class="btn btn-outline-secondary">Se connecter</button></a>  
+                            <a href="{{path('app_register')}}"><button type="button" class="btn btn-outline-secondary">S'inscrire</button></a>
+                        
+
+                            
+                        {% endif %}
+                    </li>
+
+                </ul>
+
+
+
+
+
             </div>
         </nav>
 

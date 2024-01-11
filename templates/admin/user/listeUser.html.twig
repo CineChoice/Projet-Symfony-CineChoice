@@ -12,11 +12,11 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col-2">Nom</th>
-                    <th scope="col-2">Prenom</th>
-                    <th scope="col-4">Adresse mail</th>
-                    <th scope="col-2">Role</th>
-                    <th scope="col-2">Actions</th>
+                    <th scope="col-3">Nom</th>
+                    <th scope="col-3">Prenom</th>
+                    <th scope="col-3">Adresse mail</th>
+                    <th scope="col-3">role</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -24,20 +24,22 @@
                 {% for leUser in lesUsers %}
 
                         <tr class="table-secondary">
-                            <td class="col-2">{{leUser.nom}}</td>
-                            <td class="col-2">{{leUser.prenom}}</td>
-                            <td class="col-4">{{leUser.email}}</td>
-
-                            <td class="col-2">
+                            <td class="col-3">{{leUser.nom}}</td>
+                            <td class="col-3">{{leUser.prenom}}</td>
+                            <td class="col-3">{{leUser.email}}</td>
+                            <td class="col-3">
                             
-                            ici le role du user
-                            
-                            </td>
+                            {% for role in leUser.roles %}
+                                {% if role == "ROLE_ADMIN" %}
+                                    Administrateur
+                                    {% else %}
+                                    Utilisateur   
+                                {% endif %}
+                                
+                            {% endfor %}
+                           
+                           
 
-
-                            <td class="col-2">
-                            
-                                C
                             </td>
 
                 {% endfor %}

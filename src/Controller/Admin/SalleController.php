@@ -90,6 +90,4 @@ class SalleController extends AbstractController
             ]);
         }
 
-
-
 }
